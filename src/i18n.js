@@ -195,9 +195,9 @@ export function setName(index) {
 
 export function localizeStatic() {
   document.documentElement.lang = "en";
-  document.title = "Azeroth Survivors Save Editor | Free Online Tool by ajtvz";
+  document.title = "Azeroth Survivors Save Editor v0.141.0 | ajtvz";
   document.querySelector('meta[name="description"]').content =
-    "Free online Azeroth Survivors save editor by ajtvz. Edit characters, gear sets, achievements, talents, and progress in your browser.";
+    "Updated for Azeroth Survivors v0.141.0, this free online save editor lets you edit characters, gear, talents, achievements, and progress in your browser.";
   for (const element of document.querySelectorAll("[data-i18n]")) element.textContent = t(element.dataset.i18n);
   for (const element of document.querySelectorAll("[data-i18n-placeholder]")) element.placeholder = t(element.dataset.i18nPlaceholder);
   document.querySelector("#save-input").placeholder = "RSE1:VnWO…\nor\npick|…";

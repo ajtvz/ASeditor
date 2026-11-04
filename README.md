@@ -4,7 +4,7 @@
 
 ## [✨ Open the editor — use it in your browser](https://ajtvz.github.io/ASeditor/)
 
-Free browser-based **Azeroth Survivors save editor**—no download or installation needed. Open a save, customize characters, gear sets, achievements, talents, and more, then export an edited `.sav` file or copy its RSE1 string. Save data is processed locally in your browser, not uploaded to a server.
+Updated for **Azeroth Survivors v0.141.0**, this free browser-based **Azeroth Survivors save editor** lets you customize characters, gear sets, achievements, talents, and more—then export an edited `.sav` file or copy its RSE1 string. No download or installation needed; save data is processed locally in your browser, not uploaded to a server.
 
 ![Azeroth Survivors Save Editor home screen](docs/screenshots/editor-home.png)
 
