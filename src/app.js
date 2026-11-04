@@ -23,6 +23,7 @@ let achievementDetails;
 let model;
 let activeTab = "zones";
 let selectedClass = "11";
+let selectedLoadoutSet = "7";
 let codexGroup = "amulets";
 let itemQuery = "";
 let itemScope = "class";
@@ -907,7 +908,37 @@ function renderItems() {
     if (itemDetails(id)?.classId !== selectedClass) itemScope = "all";
   }));
   body.append(node("h4", { className: "subheading", text: "Equipment loadout" }),
-    node("p", { className: "hint", text: `Choose gear for each ${className(selectedClass)} slot. Selecting an item adds it to your collection; each equipped piece can be upgraded from 0 to 5 stars.` }));
+    node("p", { className: "hint", text: `Choose gear for each ${className(selectedClass)} slot, or equip a whole set at once (replacing this class's current loadout). Selecting an item adds it to your collection; each equipped piece can be upgraded from 0 to 5 stars.` }));
+  const setPicker = node("select", { ariaLabel: "Gear set to equip" });
+  for (const set of collectionSets) {
+    setPicker.append(node("option", { value: String(set), text: setName(set) }));
+  }
+  setPicker.value = selectedLoadoutSet;
+  setPicker.addEventListener("change", () => { selectedLoadoutSet = setPicker.value; });
+  const equipSet = button("Equip entire set", () => {
+    const setIds = classCollectionIds(selectedClass).filter(id => itemDetails(id)?.set === Number(selectedLoadoutSet));
+    const equipmentSlots = equipmentSlotsForClass(selectedClass);
+    const slotByItemSlot = new Map(equipmentSlots);
+    const managedSlots = new Set(equipmentSlots.map(([, equipmentSlot]) => String(equipmentSlot)));
+    const next = classCsv("equip").filter(entry => !managedSlots.has(entry.split(":")[0]));
+    for (const id of setIds) {
+      const { slot } = itemDetails(id);
+      const equipmentSlot = slotByItemSlot.get(slot);
+      if (equipmentSlot !== undefined) next.push(`${equipmentSlot}:${id}`);
+    }
+    if (!setIds.length) {
+      return showMessage(`No equipment available for ${setName(Number(selectedLoadoutSet))}.`, "error");
+    }
+    beginBulkAction();
+    model.setList("items", [...new Set([...model.list("items"), ...setIds])]);
+    model.set("equip", [selectedClass, next.join(",")], selectedClass);
+    finishBulkAction();
+    render();
+    showMessage(`Equipped the full ${setName(Number(selectedLoadoutSet))} set for ${className(selectedClass)}.`, "success");
+  }, "primary");
+  body.append(node("div", { className: "equipment-set-actions" },
+    field("Gear set", setPicker),
+    equipSet));
   const equippedBySlot = new Map(classCsv("equip").map(entry => {
     const [slot, id] = entry.split(":");
     return [slot, id];

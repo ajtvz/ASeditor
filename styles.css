@@ -1720,6 +1720,15 @@ input[type=checkbox]{accent-color:#68ecc3}
 .equipment-loadout-row select:disabled{opacity:.55}
 .equipment-loadout-actions{display:flex;justify-content:flex-end;margin-top:12px}
 .equipment-loadout-actions .button{min-height:39px}
+.equipment-set-actions{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  margin:12px 0;
+}
+.equipment-set-actions .field{min-width:170px}
+.equipment-set-actions select{min-height:39px}
+.equipment-set-actions .button{min-height:39px}
 #panel-body,.panel{min-width:0;max-width:100%}
 .collection-scroll{min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
 @media(max-width:640px){
@@ -1732,6 +1741,9 @@ input[type=checkbox]{accent-color:#68ecc3}
   .gear-tile{min-height:64px}
   .equipment-loadout{grid-template-columns:1fr}
   .equipment-loadout-row{grid-template-columns:minmax(95px,.75fr) minmax(0,1.4fr) minmax(78px,.55fr);gap:7px;padding:8px}
+  .equipment-set-actions{align-items:stretch;flex-direction:column}
+  .equipment-set-actions .field{min-width:0}
+  .equipment-set-actions>.button{width:100%}
 }
 
 .workspace{padding-top:clamp(24px,3.2vw,42px)}
@@ -2007,4 +2019,48 @@ input[type=checkbox]{accent-color:#68ecc3}
   .achievement-score-controls{width:100%;align-items:flex-end}
   .achievement-score-controls .field{flex:1}
   .achievement-score-controls>.button{width:auto}
+}
+.save-location-guide{
+  margin:0 0 24px;
+  padding:15px 17px;
+  border:1px solid #a48a56;
+  background:#f7ecd16e;
+}
+.save-location-guide summary{
+  color:#3e321e;
+  font-size:14px;
+  font-weight:750;
+  cursor:pointer;
+}
+.save-location-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.save-location{
+  min-width:0;
+  padding:12px;
+  border:1px solid #b39c6c;
+  background:#fff8e766;
+}
+.save-location h3{
+  margin:0 0 7px;
+  color:#514127;
+  font-size:12px;
+}
+.save-location code{
+  display:block;
+  overflow-wrap:anywhere;
+  color:#684b20;
+  font-size:11px;
+}
+.save-location p{
+  margin:8px 0 0;
+  color:#5f523a;
+  font-size:11px;
+  line-height:1.55;
+}
+@media(max-width:760px){
+  .save-location-grid{grid-template-columns:1fr}
 }

@@ -11,7 +11,7 @@ No download or installation needed. Your save is read and edited locally in your
 ## Make your save your own
 
 - Adjust character progress, zones, talents, gear, equipment, codex entries, stats, perks, pets, and more.
-- Choose gear for each character equipment slot, set individual upgrades from 0 to 5 stars, or upgrade all currently equipped items to 5 stars.
+- Equip a complete gear set at once or choose items for each character slot; set individual upgrades from 0 to 5 stars or upgrade all equipped items to 5 stars.
 - Browse and search 129 achievements, edit earned dates, or choose an exact achievement score up to 3,195 points.
 - Export an edited `.sav` file or copy its RSE1 string to import into your game.
 - Keep your original save as a backup before importing changes.
