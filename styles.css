@@ -604,6 +604,9 @@ body{
 .brand-copy{gap:4px;color:#f2efff;font-family:ui-sans-serif,system-ui,sans-serif}
 .brand-copy strong{font-size:13px;font-weight:850;letter-spacing:.13em}
 .brand-copy span{color:#8df2d2;font-size:9px;letter-spacing:.2em}
+.brand-byline{display:flex;align-items:center;gap:9px}
+.brand-byline a{color:#c6b6ff;font-size:9px;font-weight:700;letter-spacing:.08em;text-decoration:none}
+.brand-byline a:hover,.brand-byline a:focus-visible{color:#fff;text-decoration:underline}
 .local-badge{
   border:1px solid #3c685f;
   background:#172a2b;
