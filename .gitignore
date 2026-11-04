@@ -1,0 +1,6 @@
+*.sav
+*.sav.txt
+*.exe
+.DS_Store
+__pycache__/
+metadata-extracts/

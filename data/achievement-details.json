@@ -1,0 +1,178 @@
+{
+  "groups": [
+    {
+      "title": "Zones",
+      "items": [
+        ["zone:elwynn", "Elwynn Forest", 10, "Defeat Edwin VanCleef in Elwynn Forest with any class.", "Perk: Banish"],
+        ["zone:duskwood", "Duskwood", 10, "Defeat Morbent Fel in Duskwood with any class.", "Perk: Skip · Companion: Snowshoe Rabbit"],
+        ["zone:wsg", "Warsong Gulch", 10, "Defeat Lord Kazzak in Warsong Gulch with any class.", "Perk: Veteran's Lessons · Companion: Crimson Macaw · Tabards: Warsong Battle and Silverwing Battle"],
+        ["zone:ungoro", "Un'Goro Crater", 10, "Defeat King Mosh in Un'Goro Crater with any class."],
+        ["zone:ab", "Arathi Basin", 10, "Defeat Lord Aliden Perenolde in Arathi Basin with any class.", "Companion: Great Horned Owl · Tabards: Arathor Battle and Defilers Battle"],
+        ["zone:feralas", "Feralas", 15, "Defeat King Gordok in Feralas with any class.", "Companion: Tree Frog"],
+        ["zone:arena", "Gurubashi Arena", 15, "Defeat Hakkar the Soullayer in Gurubashi Arena with any class.", "Companion: Black Kingsnake"],
+        ["zone:sm", "Scarlet Monastery", 15, "Defeat High Inquisitor Whitemane in Scarlet Monastery with any class."],
+        ["zone:av", "Alterac Valley", 15, "Defeat Azuregos in Alterac Valley with any class.", "Companion: Sprite Darter · Tabards: Stormpike Battle and Frostwolf Battle"],
+        ["zone:brm", "Blackrock Mountain", 20, "Defeat Nefarian in Blackrock Mountain with any class.", "Companion: Black Whelpling"],
+        ["zone:aq", "Gates of Ahn'Qiraj", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with any class.", "Companion: Zergling"],
+        ["zone:naxx", "Naxxramas", 30, "Defeat Kel'Thuzad in Naxxramas with any class."]
+      ]
+    },
+    {
+      "title": "Co-op",
+      "items": [
+        ["coop:together", "Better Together", 10, "Complete your first zone with at least one other player.", "Appearance: Admiral's Hat"],
+        ["coop:fiveofakind", "Five of a Kind", 25, "Complete any zone in co-op with all five players using the same class.", "Appearance: Bloodsail Admiral's Hat"],
+        ["coop:photosynthesis", "Rest in Photosynthesis", 50, "Defeat Kel'Thuzad on Heroic III in co-op with five Druids. Each must learn Tranquility, and it must deal the final blow.", "Companion: Ancient Protector"],
+        ["coop:insane", "The Insane", 50, "Survive at least 40 minutes in Naxxramas on Heroic V with two or more other players."],
+        ["coop:matching", "Matching Outfits", 25, "Win a party of three or more with every player wearing the same set's 8-piece bonus."],
+        ["coop:raidnight", "Raid Night", 25, "Beat Heroic II or harder in a party of five."],
+        ["coop:odds", "Against All Odds", 50, "Complete a zone on Heroic III or harder with at least one other player."],
+        ["coop:brotherhood", "The Brotherhood Falls", 25, "Defeat Edwin VanCleef in co-op with five players, all using different classes.", "Appearance: Cape of the Brotherhood"],
+        ["coop:bump", "Things That Go Bump in the Night", 25, "Complete Duskwood at least once with another player and no player dying.", "Appearance: Embrace of the Lycan"],
+        ["coop:team", "For the Team", 10, "Complete Warsong Gulch and Arathi Basin, each with at least one other player."],
+        ["coop:jurassic", "Jurassic Pack", 25, "Complete Un'Goro Crater in co-op with five Hunters."],
+        ["coop:smoothie", "Hakkar Smoothie", 50, "Defeat Hakkar with five Warriors, all having Bladestorm. Whirlwind must deal the final blow.", "Companion: Mini Herod"],
+        ["coop:holyframe", "Holy Frame Drops", 50, "Defeat High Inquisitor Whitemane on Heroic III in co-op with five Paladins, each with Consecration as their highest-ranked spell.", "Appearance: Whitemane's Chapeau"],
+        ["coop:dragonslayers", "Dragonslayers", 25, "Defeat Azuregos and Nefarian in co-op, each with at least one other player.", "Appearance: Cloak of the Brood Lord"],
+        ["coop:totemly", "Totem'ly Balanced", 50, "Defeat Nefarian in co-op with five Shamans, each with Magma Totem as their highest-ranked spell.", "Companion: Mini Nefarian"],
+        ["coop:oldgods", "The Old Gods Have No Friends", 50, "Defeat C'Thun on Heroic III or harder with at least one other player.", "Appearance: Cloak of the Devoured"],
+        ["coop:end", "Together, To the End", 50, "Complete all 12 zones with at least one other player, across any number of runs.", "Companion: Mr. Bigglesworth"]
+      ]
+    },
+    {
+      "title": "Feats",
+      "items": [
+        ["feat:humble", "Humble Beginnings", 25, "Beat Naxxramas wearing a common set's 8-piece bonus."],
+        ["feat:unpolished", "Unpolished", 25, "Beat Heroic I or harder without gear above 0 stars."],
+        ["feat:endless3", "Overtime", 10, "Slay three bosses in endless mode in one run."],
+        ["feat:endless6", "Never Ending", 25, "Slay six bosses in endless mode in one run."],
+        ["feat:marks100", "Hazard Pay", 25, "Earn 100 marks in one run."],
+        ["feat:bossmarks50", "Danger Money", 50, "Earn 50 marks from one boss."],
+        ["feat:kills2500", "Slaughterhouse", 10, "Slay 2,500 enemies in one run.", "Perk: Opening Hand"],
+        ["feat:kills6000", "Carnage", 25, "Slay 6,000 enemies in one run."],
+        ["feat:lairs", "Lair Breaker", 25, "Slay four guardians before 8:00 in one run."],
+        ["feat:endless25", "Overtime", 10, "Survive to 25:00 in endless mode."],
+        ["feat:endless30", "Unending", 25, "Survive to 30:00 in endless mode."],
+        ["feat:endless40", "Deathless Hour", 50, "Survive to 40:00 in endless mode.", "Companion: Panda Cub"],
+        ["feat:bare", "Bare Knuckles", 25, "Win a run wearing no gear."],
+        ["feat:thrifty", "Thrifty", 25, "Win a run without buying a cache."],
+        ["feat:odds", "Against the Odds", 50, "Win a run on Heroic III or harder."],
+        ["feat:nou", "no U", 25, "Slay Sapphiron with Frostbolt as the killing blow.", "Companion: Sapphiron · Appearance: Glacial Cloak"],
+        ["feat:herod", "Spin to Win", 25, "Defeat Herod with Whirlwind.", "Tabard: Scarlet Crusade · Appearance: Dashing Scarlet Cloak"],
+        ["feat:hakkar", "Suck It, Hakkar!", 25, "Defeat Hakkar with Drain Life.", "Companion: Swift Zulian Tiger · Appearance: Zul'Gurub Mask"],
+        ["feat:nefarian", "Bad Dragon!", 25, "Have a summoned pet deal the killing blow to Nefarian.", "Companion: Mini Chromatic Drakonid · Appearance: Onyxia Scale Cloak"],
+        ["feat:cthun", "Eye for an Eye", 50, "Defeat C'Thun without dealing damage to it.", "Companion: Mini Eye of C'Thun · Appearance: Gnomish Mind Control Cap"],
+        ["feat:vancleef", "You're Fired", 10, "Defeat Edwin VanCleef with a Fire spell.", "Appearance: Defias Bandana"],
+        ["feat:stitches", "Stitches Get Stitches", 10, "Defeat Stitches with a Bleed effect.", "Companion: Mini Stitches"],
+        ["feat:kazzak", "Not Today, Satan", 25, "Defeat Lord Kazzak with Holy damage.", "Companion: Mini Doomguard"],
+        ["feat:mosh", "Clever Girl", 25, "Have a summoned pet deal the killing blow to King Mosh.", "Companion: Baby Devilsaur"],
+        ["feat:kovork", "Bonk the Bonker", 10, "Defeat Kovork with a melee attack.", "Companion: Mini Ogre"],
+        ["feat:gordok", "Stop Hitting Yourself", 25, "Defeat King Gordok using reflected damage from a Shaman's Lightning Shield, a Druid's Thorns, or a Paladin's Holy Shield.", "Companion: Tiny Gordok"],
+        ["feat:azuregos", "Blue Screen of Death", 25, "Defeat Azuregos with an Arcane spell.", "Companion: Azure Whelpling · Appearance: Gnomish Goggles"],
+        ["feat:graduation", "Stormstrike Graduation", 25, "As an Enhancement Shaman, defeat Darkmaster Gandling with Stormstrike as the killing blow."],
+        ["feat:straightas", "Straight A's", 25, "Defeat Darkmaster Gandling without any player taking damage from Headmaster's Office or The Last Examination."]
+      ]
+    },
+    {
+      "title": "Milestones",
+      "items": [
+        ["count:marks100", "Marked", 10, "Earn 100 marks."],
+        ["count:marks1k", "Well Paid", 25, "Earn 1,000 marks."],
+        ["count:marks10k", "Quartermaster", 50, "Earn 10,000 marks."],
+        ["count:kills10k", "Exterminator", 10, "Slay 10,000 enemies."],
+        ["count:kills100k", "Scourge of Azeroth", 25, "Slay 100,000 enemies.", "Companion: Undercity Cockroach"],
+        ["count:kills1m", "A Million Dead", 50, "Slay 1,000,000 enemies."],
+        ["count:gold5k", "Pocket Change", 10, "Collect 5,000 gold.", "Perks: Long Leash, Quick Paws, Gold-sniffer, Wisp-herder, Rune-hound"],
+        ["count:gold50k", "Treasure Hunter", 25, "Collect 50,000 gold.", "Perk: Second Companion"],
+        ["count:guardians100", "Lair Raider", 10, "Slay 100 guardians."],
+        ["count:guardians500", "Warden's Bane", 25, "Slay 500 guardians."],
+        ["count:bosses100", "Boss Hunter", 10, "Slay 100 bosses."],
+        ["count:caches100", "Cache Cracker", 10, "Buy 100 caches."],
+        ["count:runs10", "Regular", 10, "Play 10 runs.", "Perk: Second Thoughts"],
+        ["count:runs100", "Veteran", 10, "Play 100 runs.", "Companion: Westfall Chicken"],
+        ["count:wins50", "Conqueror", 25, "Win 50 runs."]
+      ]
+    },
+    {
+      "title": "Heroic",
+      "items": [
+        ["heroic:1", "Heroic Debut", 10, "Beat Heroic I in any zone."],
+        ["heroic:3", "Heroic Resolve", 25, "Beat Heroic III in any zone."],
+        ["heroic:all3", "Heroic Across Azeroth", 50, "Beat Heroic III in every zone, with any class."],
+        ["heroic:naxx5", "Champion of Naxxramas", 50, "Beat Heroic V in Naxxramas.", "Unlocks the Crusader weapon glow"],
+        ["heroic:prepared", "Yes, I am prepared!", 50, "Complete Scholomance on Heroic V solo with all nine classes, using each class's Tier 0.5 set bonuses and matching specialization talents."]
+      ]
+    },
+    {
+      "title": "Armory and Collection",
+      "items": [
+        ["talents:1", "Fully Talented", 25, "Earn all 51 talent points with one class."],
+        ["talents:9", "Master of All", 50, "Earn all 51 talent points with every class."],
+        ["pieces:25", "Collector", 10, "Collect 25 pieces of gear, of any class.", "Perk: Keen Eye"],
+        ["pieces:100", "Hoarder", 10, "Collect 100 pieces of gear, of any class."],
+        ["pieces:250", "Curator", 25, "Collect 250 pieces of gear, of any class."],
+        ["pieces:all", "The Whole Armory", 50, "Collect every gear piece for every class."],
+        ["legendaryset", "Legendary Set", 25, "Collect every legendary piece for one class."],
+        ["codex:50", "Jeweler's Eye", 10, "Discover half of the rings, trinkets, and amulets in the codex."],
+        ["codex:100", "Every Bauble", 25, "Discover every ring, trinket, and amulet in the codex."],
+        ["stars:1", "Polished", 10, "Upgrade a gear piece to 1 star."],
+        ["stars:3", "Honed", 10, "Upgrade a gear piece to 3 stars."],
+        ["setbonus", "Matched", 10, "Activate a set bonus with four pieces of one set at 1 star or more."],
+        ["sharedset", "Shared Wisdom", 25, "Have one set's 8-piece bonus on every class."],
+        ["set8", "Suited Up", 10, "Activate an 8-piece set bonus."],
+        ["wardrobe", "Wardrobe", 25, "Activate all six set bonuses on one class."],
+        ["armoryoflegends", "Armory of Legends", 50, "Activate the legendary set bonus on every class."],
+        ["stars:4", "Beyond the Vault", 10, "Upgrade a gear piece to 4 stars."],
+        ["stars:5", "Five Stars", 25, "Upgrade a gear piece to 5 stars."],
+        ["empowered", "Empowered", 25, "Empower an 8-piece set bonus at 5 stars."],
+        ["radiantarmory", "Radiant Armory", 50, "Empower an 8-piece set bonus on every class.", "Unlocks the Fiery Weapon glow"],
+        ["collection:t05", "You Are Not Prepared!", 95, "Collect all eight Scholomance Tier 0.5 armor pieces and the full fixed Gandling weapon reward for each of the nine classes."]
+      ]
+    },
+    {
+      "title": "Zone Champions",
+      "items": [
+        ["zone9:elwynn", "Champion of Elwynn Forest", 25, "Defeat Edwin VanCleef in Elwynn Forest with all nine classes."],
+        ["zone9:duskwood", "Champion of Duskwood", 25, "Defeat Morbent Fel in Duskwood with all nine classes."],
+        ["zone9:wsg", "Champion of Warsong Gulch", 25, "Defeat Lord Kazzak in Warsong Gulch with all nine classes."],
+        ["zone9:ungoro", "Champion of Un'Goro Crater", 25, "Defeat King Mosh in Un'Goro Crater with all nine classes."],
+        ["zone9:ab", "Champion of Arathi Basin", 25, "Defeat Lord Aliden Perenolde in Arathi Basin with all nine classes."],
+        ["zone9:feralas", "Champion of Feralas", 25, "Defeat King Gordok in Feralas with all nine classes."],
+        ["zone9:arena", "Champion of Gurubashi Arena", 25, "Defeat Hakkar in Gurubashi Arena with all nine classes."],
+        ["zone9:sm", "Champion of Scarlet Monastery", 25, "Defeat High Inquisitor Whitemane in Scarlet Monastery with all nine classes."],
+        ["zone9:av", "Champion of Alterac Valley", 25, "Defeat Azuregos in Alterac Valley with all nine classes."],
+        ["zone9:brm", "Champion of Blackrock Mountain", 25, "Defeat Nefarian in Blackrock Mountain with all nine classes."],
+        ["zone9:aq", "Champion of Gates of Ahn'Qiraj", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with all nine classes."],
+        ["zone9:naxx", "Champion of Naxxramas", 25, "Defeat Kel'Thuzad in Naxxramas with all nine classes."]
+      ]
+    },
+    {
+      "title": "Classes",
+      "items": [
+        ["class:warrior", "Warrior Victorious", 10, "Win a run as a Warrior."],
+        ["class:paladin", "Paladin Victorious", 10, "Win a run as a Paladin."],
+        ["class:hunter", "Hunter Victorious", 10, "Win a run as a Hunter."],
+        ["class:rogue", "Rogue Victorious", 10, "Win a run as a Rogue."],
+        ["class:priest", "Priest Victorious", 10, "Win a run as a Priest."],
+        ["class:shaman", "Shaman Victorious", 10, "Win a run as a Shaman."],
+        ["class:mage", "Mage Victorious", 10, "Win a run as a Mage."],
+        ["class:warlock", "Warlock Victorious", 10, "Win a run as a Warlock."],
+        ["class:druid", "Druid Victorious", 10, "Win a run as a Druid."]
+      ]
+    },
+    {
+      "title": "Scarab Wall",
+      "items": [
+        ["classlast:warrior", "Warrior of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Warrior."],
+        ["classlast:paladin", "Paladin of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Paladin."],
+        ["classlast:hunter", "Hunter of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Hunter."],
+        ["classlast:rogue", "Rogue of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Rogue."],
+        ["classlast:priest", "Priest of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Priest."],
+        ["classlast:shaman", "Shaman of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Shaman."],
+        ["classlast:mage", "Mage of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Mage."],
+        ["classlast:warlock", "Warlock of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Warlock."],
+        ["classlast:druid", "Druid of the Scarab Wall", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with a Druid."]
+      ]
+    }
+  ]
+}

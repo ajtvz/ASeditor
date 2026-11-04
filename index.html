@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Local Azeroth Survivors save editor. Import RSE1, edit progress, and export .sav.">
+  <title>Azeroth Survivors — Save Editor</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="site-header shell">
+    <div class="brand-mark" aria-hidden="true">AS</div>
+    <div class="brand-copy"><strong>AZEROTH SURVIVORS</strong><span data-i18n="RIFTBOUND / SAVE STUDIO">RIFTBOUND / SAVE STUDIO</span></div>
+    <span class="local-badge" data-i18n="Runs in your browser · no server upload">Runs in your browser · no server upload</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow" data-i18n="YOUR RUN / SAVE SYSTEM">YOUR RUN / SAVE SYSTEM</p>
+      <h1 data-i18n="Shape your legend.">Shape your legend.</h1>
+      <p data-i18n="Your progress. Your path. Open a save, shape your chronicle, and carry it back into the game when you are ready.">Your progress. Your path. Open a save, shape your chronicle, and carry it back into the game when you are ready.</p>
+    </section>
+
+    <section class="card import-card" aria-labelledby="import-title">
+      <div class="import-heading">
+        <div class="import-heading-copy">
+          <p class="eyebrow" data-i18n="01 / RESTORE YOUR JOURNEY">01 / RESTORE YOUR JOURNEY</p>
+          <h2 id="import-title" data-i18n="Every run has a next chapter.">Every run has a next chapter.</h2>
+          <p data-i18n="Open your save to pick up where you left off. Your file stays on this device.">Open your save to pick up where you left off. Your file stays on this device.</p>
+        </div>
+        <span id="format-status" class="pill" data-i18n="Waiting for a file">Waiting for a file</span>
+      </div>
+      <div class="import-experience">
+        <div id="save-profile" class="import-art save-profile" aria-live="polite">
+          <div class="import-art-stars"></div>
+          <div class="profile-placeholder">
+            <div class="import-seal" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M32 5 54 18v28L32 59 10 46V18L32 5Z" />
+              <path d="M23 23h18M23 30h18M23 37h11M23 44h7" />
+              <path d="M18 16 32 8l14 8M18 48l14 8 14-8" />
+            </svg>
+            </div>
+            <div class="import-art-copy">
+              <span>YOUR SAVE, YOUR STORY</span>
+              <strong>Every journey leaves its mark.</strong>
+              <small>OPEN A SAVE TO VIEW ITS CHRONICLE</small>
+            </div>
+          </div>
+          <span class="import-art-spark spark-one"></span><span class="import-art-spark spark-two"></span><span class="import-art-spark spark-three"></span>
+        </div>
+        <div class="import-options">
+          <div class="import-option-heading"><span data-i18n="Choose how to continue">Choose how to continue</span><span data-i18n="01 — FILE">01 — FILE</span></div>
+          <label id="drop-zone" class="drop-zone" for="save-file">
+            <input id="save-file" type="file" accept=".sav,.txt,text/plain">
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" /></svg>
+            </span>
+            <span class="drop-copy"><strong data-i18n="Drop your save here">Drop your save here</strong><small data-i18n="or browse files on your device">or browse files on your device</small></span>
+            <span class="browse-button" data-i18n="Browse files">Browse files</span>
+            <span class="file-hints"><span>.SAV</span><span>.TXT</span><span data-i18n="UP TO 2 MB">UP TO 2 MB</span></span>
+          </label>
+          <div class="paste-zone">
+            <label for="save-input" data-i18n="Or paste an RSE1 string / plaintext">Or paste an RSE1 string / plaintext</label>
+            <textarea id="save-input" rows="3" spellcheck="false" placeholder="RSE1:VnWO…&#10;or&#10;pick|…"></textarea>
+            <button id="load-text" class="button secondary" type="button" data-i18n="Open pasted text">Open pasted text</button>
+          </div>
+        </div>
+      </div>
+      <p id="message" class="message" role="status" aria-live="polite" data-i18n="The file is read only on your device.">The file is read only on your device.</p>
+    </section>
+
+    <section id="workspace" class="workspace" hidden>
+      <div class="workspace-top">
+        <div><p class="eyebrow" data-i18n="02 / EDITOR">02 / EDITOR</p><h2 data-i18n="Account progress">Account progress</h2><p id="save-summary" class="muted"></p></div>
+        <div class="export-actions"><button id="undo-bulk" class="button secondary" type="button" hidden>Undo bulk</button><button id="copy-save" class="button secondary" type="button" data-i18n="Copy RSE1">Copy RSE1</button><button id="download-save" class="button primary" type="button" data-i18n="Download .sav">Download .sav</button></div>
+      </div>
+      <div class="editor-layout">
+        <nav class="tabs" aria-label="Editor sections">
+          <button class="tab active" data-tab="zones" type="button" data-i18n="Zones">Zones</button>
+          <button class="tab" data-tab="talents" type="button" data-i18n="Talents">Talents</button>
+          <button class="tab" data-tab="codex" type="button" data-i18n="Codex">Codex</button>
+          <button class="tab" data-tab="achievements" type="button" data-i18n="Achievements">Achievements</button>
+          <button class="tab" data-tab="items" type="button" data-i18n="Items and equipment">Items and equipment</button>
+          <button class="tab" data-tab="other" type="button" data-i18n="Other">Other</button>
+          <button class="tab" data-tab="raw" type="button" data-i18n="Plaintext">Plaintext</button>
+        </nav>
+        <div class="panel card">
+          <div id="panel-header" class="panel-header"></div>
+          <div id="panel-body"></div>
+        </div>
+      </div>
+      <p class="footnote" data-i18n="Importing into the game replaces current progress. Keep the original file until you verify the result in game. Unknown lines are preserved when editing through forms.">Importing into the game replaces current progress. Keep the original file until you verify the result in game. Unknown lines are preserved when editing through forms.</p>
+    </section>
+  </main>
+  <footer class="shell footer"><span data-i18n="Independent tool for Azeroth Survivors">Independent tool for Azeroth Survivors</span><span data-i18n="RSE1 format · local processing">RSE1 format · local processing</span></footer>
+</body>
+</html>
