@@ -1,6 +1,6 @@
 # Azeroth Survivors Save Editor — Free Online Tool by ajtvz
 
-**Customized and maintained by ajtvz** · Created by [darhanger](https://github.com/darhanger)
+**Remade and maintained by ajtvz** · Created by [darhanger](https://github.com/darhanger)
 
 ## [✨ Open the editor — use it in your browser](https://ajtvz.github.io/ASeditor/)
 
