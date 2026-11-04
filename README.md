@@ -21,21 +21,21 @@ No download or installation needed. Your save is read and edited locally in your
 ## How to use
 
 1. **[Open the editor](https://ajtvz.github.io/ASeditor/).**
-2. Select your `characters.txt` save or an exported `.sav` file, or paste an RSE1 string.
+2. Select your save file from the game's `Saves` folder, or paste an RSE1 string.
 3. Make your changes, then download the edited save or copy the RSE1 string.
 4. Import the edited save in the game. Keep your backup until you confirm it works.
 
 ## Find your save file
 
-The editor runs in your browser and does not search your computer automatically. Use **Browse files** to select the save file from its folder. The game stores its character save in these locations:
+The editor runs in your browser and does not search your computer automatically. Use **Browse files** to select a save file from the game's `Saves` folder:
 
-| Platform | Character save | Exports and backups |
-| --- | --- | --- |
-| Windows | `%APPDATA%\wenilla-rogue\characters.txt` | `%APPDATA%\wenilla-rogue\Saves` |
-| Linux | `~/.local/share/wenilla-rogue/characters.txt` (or `$XDG_DATA_HOME/wenilla-rogue/characters.txt`) | `~/.local/share/wenilla-rogue/Saves` |
-| macOS | `~/.local/share/wenilla-rogue/characters.txt` | `~/.local/share/wenilla-rogue/Saves` |
+| Platform | Saves folder |
+| --- | --- |
+| Windows | `%APPDATA%\wenilla-rogue\Saves` |
+| Linux | `~/.local/share/wenilla-rogue/Saves` (or `$XDG_DATA_HOME/wenilla-rogue/Saves`) |
+| macOS | `~/.local/share/wenilla-rogue/Saves` |
 
-On Windows, press **Win+R**, enter `%APPDATA%\wenilla-rogue`, and press Enter. Back up your save before replacing or importing any changes.
+For quick access, open the game and choose **Settings → Saves → Open Save Folder**. On Windows, you can also press **Win+R**, enter `%APPDATA%\wenilla-rogue\Saves`, and press Enter. Back up your save before replacing or importing any changes.
 
 ## Support development
 

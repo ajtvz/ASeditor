@@ -2023,11 +2023,12 @@ input[type=checkbox]{accent-color:#68ecc3}
 .save-location-guide{
   margin:0 0 24px;
   padding:15px 17px;
-  border:1px solid #a48a56;
-  background:#f7ecd16e;
+  border:1px solid #70582d;
+  background:#fff8e9;
+  color:#282116;
 }
 .save-location-guide summary{
-  color:#3e321e;
+  color:#282116;
   font-size:14px;
   font-weight:750;
   cursor:pointer;
@@ -2041,24 +2042,38 @@ input[type=checkbox]{accent-color:#68ecc3}
 .save-location{
   min-width:0;
   padding:12px;
-  border:1px solid #b39c6c;
-  background:#fff8e766;
+  border:1px solid #8a734a;
+  background:#fffdf7;
+  color:#3c3528;
 }
 .save-location h3{
   margin:0 0 7px;
-  color:#514127;
+  color:#282116;
   font-size:12px;
 }
 .save-location code{
   display:block;
   overflow-wrap:anywhere;
-  color:#684b20;
+  padding:7px 8px;
+  border:1px solid #a9946c;
+  background:#f1e7d2;
+  color:#332716;
   font-size:11px;
 }
 .save-location p{
   margin:8px 0 0;
-  color:#5f523a;
+  color:#3c3528;
   font-size:11px;
+  line-height:1.55;
+}
+.save-location-tip{
+  margin:14px 0 0;
+  padding:10px 12px;
+  border-left:3px solid #77551f;
+  background:#f0e2c6;
+  color:#2d2417;
+  font-size:12px;
+  font-weight:700;
   line-height:1.55;
 }
 @media(max-width:760px){
