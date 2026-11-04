@@ -762,6 +762,15 @@ function classCollectionIds(classId) {
   });
 }
 
+function equipmentSlotsForClass(classId) {
+  const slots = [
+    [0, 0], [1, 2], [2, 4], [3, 5], [4, 6],
+    [5, 7], [6, 8], [7, 9], [8, classId === "3" || classId === "11" ? 17 : 15],
+  ];
+  slots.push([9, 16]);
+  return slots;
+}
+
 function allCollectionIds() {
   return catalog.classes.flatMap(([classId]) => classCollectionIds(classId));
 }
@@ -897,28 +906,84 @@ function renderItems() {
     model.toggleList("items", id, true);
     if (itemDetails(id)?.classId !== selectedClass) itemScope = "all";
   }));
-  body.append(node("h4", { className: "subheading", text: "Экипировка класса" }));
-  const equip = classCsv("equip");
-  const equipList = node("div", { className: "stack" });
-  for (const entry of equip) {
+  body.append(node("h4", { className: "subheading", text: "Equipment loadout" }),
+    node("p", { className: "hint", text: `Choose gear for each ${className(selectedClass)} slot. Selecting an item adds it to your collection; each equipped piece can be upgraded from 0 to 5 stars.` }));
+  const equippedBySlot = new Map(classCsv("equip").map(entry => {
     const [slot, id] = entry.split(":");
-    equipList.append(node("div", { className: "rank-row" },
-      node("span", { text: `${equipmentSlotName(Number(slot))} · ${id}` }),
-      button("Убрать", () => setClassCsv("equip", equip.filter(value => value !== entry)), "danger small-button")));
+    return [slot, id];
+  }));
+  const stars = model.keyed("stars", ":");
+  const loadout = node("div", { className: "equipment-loadout" });
+  for (const [itemSlot, equipmentSlot] of equipmentSlotsForClass(selectedClass)) {
+    const currentItem = equippedBySlot.get(String(equipmentSlot)) || "";
+    const select = node("select", { ariaLabel: `${equipmentSlotName(equipmentSlot)} equipped item` });
+    select.append(node("option", { value: "", text: "Unequipped" }));
+    const choices = [...new Set([
+      ...availableItems(items).filter(id => {
+        const details = itemDetails(id);
+        return details?.classId === selectedClass && details.slot === itemSlot;
+      }),
+      ...(currentItem ? [currentItem] : []),
+    ])].sort();
+    for (const id of choices) {
+      const details = itemDetails(id);
+      const title = details ? `${setName(details.set)} · ${id}` : `Item ${id}`;
+      select.append(node("option", { value: id, text: title }));
+    }
+    select.value = currentItem;
+    select.addEventListener("change", () => {
+      const next = classCsv("equip").filter(entry => !entry.startsWith(`${equipmentSlot}:`));
+      if (select.value) {
+        next.push(`${equipmentSlot}:${select.value}`);
+        model.toggleList("items", select.value, true);
+      }
+      model.set("equip", [selectedClass, next.join(",")], selectedClass);
+      render();
+      showMessage(`${equipmentSlotName(equipmentSlot)} loadout updated.`, "success");
+    });
+
+    const upgrade = node("select", {
+      ariaLabel: `${equipmentSlotName(equipmentSlot)} star upgrades`,
+      disabled: !currentItem,
+    });
+    for (let value = 0; value <= 5; value++) {
+      upgrade.append(node("option", { value: String(value), text: `${value} ${value === 1 ? "star" : "stars"}` }));
+    }
+    upgrade.value = currentItem ? stars.get(currentItem) || "0" : "0";
+    upgrade.addEventListener("change", () => {
+      if (!currentItem) return;
+      model.setKey("stars", currentItem, upgrade.value === "0" ? null : upgrade.value, ":");
+      render();
+      showMessage(`${equipmentSlotName(equipmentSlot)} upgrade level updated.`, "success");
+    });
+
+    const details = itemDetails(currentItem);
+    loadout.append(node("div", { className: "equipment-loadout-row" },
+      node("div", { className: "equipment-loadout-slot" },
+        details ? icon(visuals?.gear?.[selectedClass]?.[details.set]?.[details.slot]
+          ? `game/${visuals.gear[selectedClass][details.set][details.slot]}`
+          : details.set === 5 ? "pvp" : `slot-${slotSlugs[details.slot]}`)
+          : icon(`slot-${slotSlugs[itemSlot]}`),
+        node("strong", { text: equipmentSlotName(equipmentSlot) })),
+      select,
+      upgrade));
   }
-  const slotInput = node("input", { type: "number", min: "0", step: "1", placeholder: "Слот" });
-  const itemInput = node("input", { type: "text", inputMode: "numeric", placeholder: "ID предмета" });
-  const form = node("form", { className: "inline-form" }, slotInput, itemInput, node("button", { type: "submit", className: "button secondary", text: "Установить" }));
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-    if (!/^\d+$/.test(slotInput.value) || !/^\d+$/.test(itemInput.value)) return showMessage("Введите числовой слот и ID предмета.", "error");
-    const next = equip.filter(entry => !entry.startsWith(`${slotInput.value}:`));
-    next.push(`${slotInput.value}:${itemInput.value}`);
-    model.toggleList("items", itemInput.value, true);
-    setClassCsv("equip", next);
-  });
-  body.append(equipList, form);
-  body.append(node("p", { className: "hint", text: "ID найденных предметов взяты из сейва. ID PvP-набора выведены из той же схемы и по умолчанию не отмечены. Слоты и совместимость проверяет игра." }));
+  const upgradeEquipped = button("Upgrade all equipped items to 5 stars", () => {
+    const currentLoadout = classCsv("equip");
+    if (!currentLoadout.length) return showMessage("Equip at least one item before applying upgrades.", "error");
+    const nextStars = model.keyed("stars", ":");
+    for (const entry of currentLoadout) {
+      const [, id] = entry.split(":");
+      if (id) nextStars.set(id, "5");
+    }
+    beginBulkAction();
+    model.setKeyed("stars", nextStars, ":");
+    finishBulkAction();
+    render();
+    showMessage(`All ${currentLoadout.length} equipped items upgraded to 5 stars.`, "success");
+  }, "primary");
+  body.append(loadout, node("div", { className: "equipment-loadout-actions" }, upgradeEquipped),
+    node("p", { className: "hint", text: "Equipped items are saved in this character's equip record. Star upgrades are stored by item ID in the account's stars record; the game validates slot compatibility and upgrade rules." }));
 
   body.append(node("h4", { className: "subheading", text: "Marks" }));
   const marksBulkAction = node("div", { className: "bulk-editor-action" },
