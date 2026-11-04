@@ -1,4 +1,4 @@
-# Azeroth Survivors Save Editor
+# Azeroth Survivors Save Editor — Free Online Browser Tool
 
 **Customized and maintained by ajtvz** · Created by [darhanger](https://github.com/darhanger)
 
@@ -7,6 +7,8 @@
 No download or installation needed. Your save is read and edited locally in your browser; it is not uploaded to a server.
 
 ![Azeroth Survivors Save Editor home screen](docs/screenshots/editor-home.png)
+
+**Edit your Azeroth Survivors save online:** customize character progress, equip complete gear sets, upgrade equipment, change talents, and manage achievements in one free browser-based tool.
 
 ## Make your save your own
 
@@ -40,6 +42,13 @@ For quick access, open the game and choose **Settings → Saves → Open Save Fo
 ## Support development
 
 Enjoying the editor? [💜 Support ajtvz on PayPal](https://paypal.me/aaronaj222). Donations are optional and appreciated.
+
+## Important notices
+
+- **Back up your save first.** Importing an edited save into the game replaces the current progress represented by that save. Keep the original until you have confirmed the edited save works.
+- **Local processing.** The editor reads and modifies the file in your browser; it does not upload save data to the editor's server. You choose where to save or import the exported result.
+- **Results are not guaranteed.** The game may reject, ignore, or recalculate edited values, including achievements and other progression. Review changes and verify them in game.
+- **Independent fan-made project.** This community editor is not affiliated with, endorsed by, or an official product of the game's developers or publisher. Azeroth Survivors and related marks belong to their respective owners.
 
 ## Credits
 

@@ -29,6 +29,7 @@ jobs:
           mkdir -p _site
           cp index.html styles.css _site/
           cp -R src data assets _site/
+          cp robots.txt sitemap.xml _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5
         with:
