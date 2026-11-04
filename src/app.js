@@ -254,7 +254,6 @@ function heroRacePicker() {
     values[1] = raceId;
     while (values.length < 4) values.push(values.length === 2 ? "0" : "0,0,0,0,0");
     model.set("hero", values, selectedClass);
-    model.toggleList("races", raceId, true);
     render();
     showMessage(`${className(selectedClass)} race updated to ${raceNames[Number(raceId)] || `Race ${raceId}`}.`, "success");
   });
@@ -268,18 +267,8 @@ function renderHeroes() {
       node("strong", { text: `${className(selectedClass)}` }),
       node("small", { text: "Choose any race for this hero. The selection is saved separately for each class." })),
     node("div", { className: "hero-selection-controls" }, heroRacePicker()));
-  const unlockAllRaces = button("Unlock every race for every hero", () => {
-    beginBulkAction();
-    model.setList("races", Object.keys(raceNames));
-    finishBulkAction();
-    render();
-    showMessage("Every race is unlocked for every hero.", "success");
-  }, "primary");
   body.append(controls,
-    node("div", { className: "hero-bulk-actions" },
-      node("p", { className: "hint", text: "Choosing a race also unlocks it globally. Use this action to unlock all eight races for every hero." }),
-      unlockAllRaces));
-  body.append(node("h4", { className: "subheading hero-talents-heading", text: "Talents" }));
+    node("h4", { className: "subheading hero-talents-heading", text: "Talents" }));
   renderTalents(false);
 }
 
@@ -878,7 +867,36 @@ function renderItems() {
       finishBulkAction();
       render();
       showMessage("All equipment pieces unlocked.", "success");
-    }, "primary")));
+    }, "primary")),
+    button("Set all gear to 5 stars for all characters", async () => {
+      const allItemIds = allCollectionIds();
+      const nextStars = new Map(model.keyed("stars", ":"));
+      for (const id of allItemIds) {
+        if (!nextStars.has(id)) {
+          nextStars.set(id, "5");
+        } else if (Number(nextStars.get(id)) < 5) {
+          nextStars.set(id, "5");
+        }
+      }
+      beginBulkAction();
+      model.setList("items", [...new Set([...model.list("items"), ...allItemIds])]);
+      model.setKeyed("stars", nextStars, ":");
+      for (const [classId] of catalog.classes) {
+        const equipmentSlots = equipmentSlotsForClass(classId);
+        const slotByItemSlot = new Map(equipmentSlots);
+        const managedSlots = new Set(equipmentSlots.map(([, equipmentSlot]) => String(equipmentSlot)));
+        const next = classCsv("equip").filter(entry => !managedSlots.has(entry.split(":")[0]));
+        for (const id of allItemIds) {
+          const { slot } = itemDetails(id);
+          const equipmentSlot = slotByItemSlot.get(slot);
+          if (equipmentSlot !== undefined) next.push(`${equipmentSlot}:${id}`);
+        }
+        model.set("equip", [classId, next.join(",")], classId);
+      }
+      finishBulkAction();
+      render();
+      showMessage(`All ${allItemIds.length} gear pieces set to 5 stars and equipped for all characters.`, "success");
+    }, "primary"));
   const items = new Set(model.list("items"));
   if (itemScope === "class") {
     const regularSlots = selectedClass === "4" || selectedClass === "7" ? 10 : 9;
@@ -930,6 +948,7 @@ function renderItems() {
     grid.style.gridTemplateColumns = `minmax(130px, 1.35fr) repeat(${maxSlots}, minmax(82px, 1fr))`;
     grid.append(node("div", { className: "gear-grid-corner", text: "Tier / Set" }));
     for (let slot = 0; slot < maxSlots; slot++) grid.append(node("div", { className: "gear-grid-slot", text: slotName(slot) }));
+    const stars = model.keyed("stars", ":");
     for (const set of collectionSets) {
       const slots = slotsForSet(set);
       const setIds = Array.from({ length: slots }, (_, slot) => `1${selectedClass.padStart(2, "0")}${slot}${set}0`);
@@ -956,7 +975,14 @@ function renderItems() {
         icon(name ? `game/${name}` : set === 5 ? "pvp" : `slot-${slotSlugs[slot]}`),
         node("span", { className: "gear-tile-name", text: label }),
         node("span", { className: "gear-tile-status", text: isCollected ? "✓ Collected" : "Not collected" }),
-        ...(equipped.has(id) ? [node("span", { className: "gear-tile-equipped", text: "E" })] : []));
+        ...(equipped.has(id) ? [node("span", {
+          className: "gear-tile-equipped equipped",
+          text: "E"
+        })] : []),
+        ...(stars.has(id) && Number(stars.get(id)) === 5 && !equipped.has(id) ? [node("span", {
+          className: "gear-tile-equipped",
+          text: "5"
+        })] : []));
         tile.addEventListener("click", () => { model.toggleList("items", id, !items.has(id)); render(); });
         grid.append(tile);
       }

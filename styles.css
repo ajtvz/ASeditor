@@ -1738,6 +1738,20 @@ input[type=checkbox]{accent-color:#68ecc3}
   color:#17182c;
   font:800 9px ui-sans-serif,system-ui,sans-serif;
 }
+.gear-tile-equipped.equipped{
+  background:#5fbf8f !important;
+  color:#00e06a !important;
+  box-shadow:0 0 6px #00e06a44 !important;
+  position:absolute !important;
+  top:3px !important;
+  right:4px !important;
+  display:grid !important;
+  width:15px !important;
+  height:15px !important;
+  place-items:center !important;
+  border-radius:50% !important;
+  font:800 9px ui-sans-serif,system-ui,sans-serif !important;
+}
 .gear-tile-empty{min-height:1px}
 .gear-tile.filtered-out{visibility:hidden;pointer-events:none}
 .equipment-loadout{
