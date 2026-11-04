@@ -31,7 +31,7 @@ const translations = new Map(Object.entries({
   "Предметы и экипировка": "Items and equipment",
   "Список найденных предметов аккаунта и экипировка выбранного класса.": "Account item collection and equipment for the selected class.",
   "Прочее": "Other",
-  "Статистика, награды и спутники из известных строк сейва.": "Stats, perks, and pets from known save fields.",
+  "Статистика, награды и спутники из известных строк сейва.": "Stats and pets from known save fields.",
   "Открытый текст": "Plaintext",
   "Правьте любые строки напрямую. Неизвестные поля сохраняются при экспорте.": "Edit any line directly. Unknown fields are preserved on export.",
   "Разделы редактора": "Editor sections",
@@ -159,6 +159,7 @@ const zoneNames = {
   aq: ["Ahn'Qiraj", "Ан'Кираж"],
   sm: ["Scarlet Monastery", "Монастырь Алого ордена"],
   scholo: ["Scholomance", "Некроситет"],
+  scholomance: ["Scholomance", "Некроситет"],
   naxx: ["Naxxramas", "Наксрамас"],
 };
 
@@ -189,7 +190,7 @@ export function equipmentSlotName(slot) {
   return index === undefined ? `Slot ${slot}` : slotName(index);
 }
 export function setName(index) {
-  if (index === 7) return "Tier .05";
+  if (index === 7) return "Tier 0.5";
   return setNames[index]?.[0] || String(index);
 }
 

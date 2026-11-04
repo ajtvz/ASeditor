@@ -9,10 +9,11 @@ const header = $("#panel-header");
 const message = $("#message");
 const tabNames = {
   zones: ["Зоны", "Победы и текущая открытая зона хранятся отдельно для каждого класса."],
-  talents: ["Таланты", "Опыт класса и ранги талантов. Неизвестный игре ID может быть проигнорирован."],
   codex: ["Кодекс украшений", "Здесь хранятся увиденные кольца, аксессуары и амулеты. Число 0–4 — записанное качество."],
   achievements: ["Достижения", "Флаги достижений и время получения — отдельные поля сохранения."],
-  items: ["Предметы и экипировка", "Список найденных предметов аккаунта и экипировка выбранного класса."],
+  perks: ["Perk levels", "Choose account perk ranks and stay within the maximum ranks used by the game."],
+  heroes: ["Heroes", "Choose a hero, set their race, and edit their talent experience and ranks."],
+  gear: ["Gear", "Browse, unlock, and equip items for each class."],
   other: ["Прочее", "Статистика, награды и спутники из известных строк сейва."],
   raw: ["Открытый текст", "Правьте любые строки напрямую. Неизвестные поля сохраняются при экспорте."]
 };
@@ -37,12 +38,15 @@ let bulkUndo = null;
 const achievementReleaseDate = "2026-10-14";
 const achievementDateMinimums = new Map([
   ["collection:t05", "2026-11-04"],
-  ["heroic:prepared", "2026-11-04"],
   ["feat:graduation", "2026-11-04"],
   ["feat:straightas", "2026-11-04"],
+  ["zone:scholomance", "2026-11-04"],
+  ["zone9:scholomance", "2026-11-04"],
 ]);
 const achievementScoreStep = 5;
 const classSlugs = { "1": "warrior", "2": "paladin", "3": "hunter", "4": "rogue", "5": "priest", "7": "shaman", "8": "mage", "9": "warlock", "11": "druid" };
+const raceNames = { 1: "Human", 2: "Orc", 3: "Dwarf", 4: "Night Elf", 5: "Undead", 6: "Tauren", 7: "Gnome", 8: "Troll" };
+const classDefaultRaces = { "1": 1, "2": 1, "3": 2, "4": 1, "5": 1, "7": 2, "8": 1, "9": 1, "11": 4 };
 const slotSlugs = ["head", "shoulder", "chest", "waist", "legs", "feet", "wrist", "hands", "main-hand", "off-hand"];
 
 function icon(name) {
@@ -200,12 +204,83 @@ function addForm(placeholder, action) {
   return form;
 }
 
-function classPicker() {
+function classPicker(label = "Класс") {
   const select = node("select", { value: selectedClass });
   for (const [id] of catalog.classes) select.append(node("option", { value: id, text: className(id) }));
   select.value = selectedClass;
   select.addEventListener("change", () => { selectedClass = select.value; render(); });
-  return field("Класс", node("div", { className: "picker-with-icon" }, icon(`class-${classSlugs[selectedClass]}`), select));
+  return field(label, node("div", { className: "picker-with-icon" }, icon(`class-${classSlugs[selectedClass]}`), select));
+}
+
+function classButtonPicker() {
+  const choices = node("div", { className: "class-choice-grid", role: "group", ariaLabel: "Choose a hero class" });
+  for (const [classId] of catalog.classes) {
+    const choice = node("button", {
+      type: "button",
+      className: `class-choice${classId === selectedClass ? " active" : ""}`,
+      ariaPressed: String(classId === selectedClass),
+      title: `Select ${className(classId)}`,
+    }, icon(`class-${classSlugs[classId]}`), node("span", { text: className(classId) }));
+    choice.addEventListener("click", () => {
+      selectedClass = classId;
+      render();
+    });
+    choices.append(choice);
+  }
+  return choices;
+}
+
+function heroRacePicker() {
+  const hero = model.fields("hero", selectedClass);
+  const defaultRace = classDefaultRaces[selectedClass] || 1;
+  const currentRace = hero?.[2] || String(defaultRace);
+  const select = node("select", {
+    ariaLabel: `Race for ${className(selectedClass)}`,
+    title: "Changes the race saved for this character.",
+  });
+  for (const [id, name] of Object.entries(raceNames)) {
+    select.append(node("option", { value: id, text: name }));
+  }
+  if (![...select.options].some(option => option.value === currentRace)) {
+    const name = raceNames[Number(currentRace)] || `Race ID ${currentRace}`;
+    select.append(node("option", { value: currentRace, text: `${name} · currently saved` }));
+  }
+  select.value = currentRace;
+  select.addEventListener("change", () => {
+    const raceId = select.value;
+    const values = hero
+      ? hero.slice(1)
+      : [selectedClass, String(defaultRace), "0", "0,0,0,0,0"];
+    values[1] = raceId;
+    while (values.length < 4) values.push(values.length === 2 ? "0" : "0,0,0,0,0");
+    model.set("hero", values, selectedClass);
+    model.toggleList("races", raceId, true);
+    render();
+    showMessage(`${className(selectedClass)} race updated to ${raceNames[Number(raceId)] || `Race ${raceId}`}.`, "success");
+  });
+  return field("Character race", select);
+}
+
+function renderHeroes() {
+  body.append(classButtonPicker());
+  const controls = node("section", { className: "hero-selection-panel" },
+    node("div", { className: "hero-selection-heading" },
+      node("strong", { text: `${className(selectedClass)}` }),
+      node("small", { text: "Choose any race for this hero. The selection is saved separately for each class." })),
+    node("div", { className: "hero-selection-controls" }, heroRacePicker()));
+  const unlockAllRaces = button("Unlock every race for every hero", () => {
+    beginBulkAction();
+    model.setList("races", Object.keys(raceNames));
+    finishBulkAction();
+    render();
+    showMessage("Every race is unlocked for every hero.", "success");
+  }, "primary");
+  body.append(controls,
+    node("div", { className: "hero-bulk-actions" },
+      node("p", { className: "hint", text: "Choosing a race also unlocks it globally. Use this action to unlock all eight races for every hero." }),
+      unlockAllRaces));
+  body.append(node("h4", { className: "subheading hero-talents-heading", text: "Talents" }));
+  renderTalents(false);
 }
 
 function classCsv(type) {
@@ -223,7 +298,7 @@ function saveZoneId(zoneId) {
 }
 
 function editorZoneId(zoneId) {
-  return zoneId === "scholomance" ? "scholo" : zoneId;
+  return zoneId === "scholo" ? "scholomance" : zoneId;
 }
 
 function heroicProgress(classId = selectedClass) {
@@ -292,7 +367,7 @@ function renderZones() {
   body.append(list, node("p", { className: "hint", text: "Игра может требовать согласованности открытой зоны и списка побед. Проверьте результат после импорта." }));
 
   const heroic = heroicProgress();
-  const heroicZoneIds = [...zoneIds.filter(id => id !== "scholo"), ...zoneIds.filter(id => id === "scholo")];
+  const heroicZoneIds = zoneIds;
   const heroicHeading = node("div", { className: "heroic-heading" },
     node("div", {},
       node("h4", { className: "subheading", text: "Heroic progress by map" }),
@@ -369,7 +444,7 @@ function talentProgress(experience) {
   return { earned, previous: experienceForPoints(earned), next: earned < maxTalentPoints ? experienceForPoints(earned + 1) : null };
 }
 
-function renderTalents() {
+function renderTalents(showClassPicker = true) {
   const fields = model.fields("talent", selectedClass);
   const xp = fields?.[2] || "0";
   const ranks = talentRanks();
@@ -378,7 +453,9 @@ function renderTalents() {
     if (!/^\d+$/.test(xpInput.value)) return render();
     saveTalents(xpInput.value, ranks);
   });
-  body.append(node("div", { className: "toolbar" }, classPicker(), field("Опыт талантов", xpInput)));
+  body.append(node("div", { className: "toolbar" },
+    ...(showClassPicker ? [classPicker()] : []),
+    field("Опыт талантов", xpInput)));
   const progress = talentProgress(Number(xp));
   const spent = [...ranks.values()].reduce((sum, rank) => sum + (Number(rank) || 0), 0);
   const free = Math.max(0, progress.earned - spent);
@@ -624,7 +701,7 @@ function renderAchievements() {
   const achievementBulkAction = node("div", { className: "bulk-editor-action" },
     node("div", { className: "bulk-editor-copy" },
       node("strong", { text: "Unlock all achievements with random dates" }),
-      node("small", { text: "Assigns random earned dates from October 14, 2026 through today; the four newest achievements are dated no earlier than November 4, 2026. Existing dates will be replaced." })),
+      node("small", { text: "Assigns random earned dates from October 14, 2026 through today; the five newest known achievements are dated no earlier than November 4, 2026. Existing dates will be replaced." })),
     button("Unlock all achievements", () => {
       if (currentDateValue() < achievementReleaseDate) return showMessage("The current date is before the game release date.", "error");
       const unavailable = keys.find(id => currentDateValue() < achievementMinimumDate(id));
@@ -734,7 +811,7 @@ function renderAchievements() {
     model.toggleList("ach", id, true);
     model.setKey("achat", id, String(Math.floor(Date.now() / 1000)));
   }));
-  body.append(node("p", { className: "hint", text: "Newly enabled achievements are dated today. Earned dates are generally from October 14, 2026 through today; the four newest achievements cannot be dated before November 4, 2026. Some achievements may be recalculated from stats by the game." }));
+  body.append(node("p", { className: "hint", text: "Newly enabled achievements are dated today. Earned dates are generally from October 14, 2026 through today; the five newest known achievements cannot be dated before November 4, 2026. The game builds the ID for “Yes, I am prepared!” at runtime, so add it only if you know its exact save ID. Some achievements may be recalculated from stats by the game." }));
   updateAchievementVisibility();
 }
 
@@ -786,7 +863,22 @@ function renderItems() {
   scope.append(node("option", { value: "class", text: "Выбранный класс" }), node("option", { value: "all", text: "Все классы" }));
   scope.value = itemScope;
   scope.addEventListener("change", () => { itemScope = scope.value; render(); });
-  body.append(node("div", { className: "toolbar" }, field("Предметы аккаунта", search, true), classPicker(), field("Показывать", scope)));
+  body.append(classButtonPicker(),
+    node("div", { className: "toolbar" },
+      field("Предметы аккаунта", search, true),
+      field("Показывать", scope)));
+  body.append(node("div", { className: "gear-global-actions" },
+    button("Unlock all items", () => {
+      const next = new Set(model.list("items"));
+      for (const id of allCollectionIds()) next.add(id);
+      beginBulkAction();
+      model.setList("items", [...next]);
+      itemFilter = "collected";
+      itemQuery = "";
+      finishBulkAction();
+      render();
+      showMessage("All equipment pieces unlocked.", "success");
+    }, "primary")));
   const items = new Set(model.list("items"));
   if (itemScope === "class") {
     const regularSlots = selectedClass === "4" || selectedClass === "7" ? 10 : 9;
@@ -815,17 +907,6 @@ function renderItems() {
         finishBulkAction();
         render();
         showMessage(localized(`${className(selectedClass)} collection unlocked.`, `Коллекция класса ${className(selectedClass)} открыта.`), "success");
-      }, "secondary"),
-      button("Unlock every equipment piece", () => {
-        const next = new Set(model.list("items"));
-        for (const id of accountIds) next.add(id);
-        beginBulkAction();
-        model.setList("items", [...next]);
-        itemFilter = "collected";
-        itemQuery = "";
-        finishBulkAction();
-        render();
-        showMessage("All equipment pieces unlocked.", "success");
       }, "secondary"),
       button("Reset to imported save", () => {
         beginBulkAction();
@@ -1068,6 +1149,80 @@ function updateItemVisibility() {
   }
 }
 
+function renderPerks() {
+  const perks = model.keyed("perk", ":");
+  const knownPerks = new Set(catalog.perks.map(perk => perk.id));
+  body.append(
+    node("p", { className: "hint", text: "Set account perk ranks from 0 to each perk's maximum rank. A rank of 0 removes that perk from the save." }),
+  );
+  const perkGrid = node("div", { className: "perk-grid" });
+  for (const perk of catalog.perks) {
+    const savedRank = perks.get(perk.id) || "0";
+    const rank = node("input", {
+      type: "number",
+      min: "0",
+      max: String(perk.maxRank),
+      step: "1",
+      value: savedRank,
+      ariaLabel: `${perk.name} rank, maximum ${perk.maxRank}`,
+    });
+    rank.addEventListener("change", () => {
+      const next = Number(rank.value);
+      if (!Number.isInteger(next) || next < 0 || next > perk.maxRank) {
+        rank.value = savedRank;
+        return showMessage(`${perk.name} rank must be between 0 and ${perk.maxRank}.`, "error");
+      }
+      model.setKey("perk", perk.id, next ? String(next) : null, ":");
+      render();
+      showMessage(`${perk.name} rank updated.`, "success");
+    });
+    const row = node("div", { className: "perk-card" },
+      node("div", { className: "perk-card-copy" },
+        node("strong", { text: perk.name }),
+        node("small", { text: `Maximum rank: ${perk.maxRank}` })),
+      rank);
+    if (Number(savedRank) > perk.maxRank) {
+      row.append(node("small", {
+        className: "perk-rank-warning",
+        text: "This saved rank exceeds the game's current maximum.",
+      }));
+    }
+    perkGrid.append(row);
+  }
+  body.append(perkGrid);
+
+  const unknownPerks = [...perks].filter(([id]) => !knownPerks.has(id));
+  if (unknownPerks.length) {
+    body.append(
+      node("h4", { className: "subheading", text: "Other saved perks" }),
+      node("p", { className: "hint", text: "These perk IDs are preserved because they are not in the current known-perk list." }),
+    );
+    const unknownList = node("div", { className: "grid-list" });
+    for (const [id, value] of unknownPerks) {
+      const input = node("input", {
+        type: "number",
+        min: "0",
+        max: "99",
+        step: "1",
+        value,
+        ariaLabel: `${id} rank`,
+      });
+      input.addEventListener("change", () => {
+        const next = Number(input.value);
+        if (!Number.isInteger(next) || next < 0 || next > 99) {
+          input.value = value;
+          return showMessage(`${id} rank must be between 0 and 99.`, "error");
+        }
+        model.setKey("perk", id, next ? String(next) : null, ":");
+        render();
+      });
+      unknownList.append(node("div", { className: "rank-row" }, node("span", { text: id }), input));
+    }
+    body.append(unknownList);
+  }
+  body.append(addForm("Additional perk ID", id => model.setKey("perk", id, "1", ":")));
+}
+
 function renderOther() {
   const stats = model.keyed("stat");
   body.append(node("h4", { className: "subheading", text: "Статистика" }));
@@ -1081,15 +1236,6 @@ function renderOther() {
     statGrid.append(field(id, input));
   }
   body.append(statGrid);
-  body.append(node("h4", { className: "subheading", text: "Награды / перки" }));
-  const perks = model.keyed("perk", ":");
-  const perkList = node("div", { className: "grid-list" });
-  for (const [id, value] of perks) {
-    const input = node("input", { type: "number", min: "0", max: "99", step: "1", value });
-    input.addEventListener("change", () => { model.setKey("perk", id, Number(input.value) ? input.value : null, ":"); render(); });
-    perkList.append(node("div", { className: "rank-row" }, node("span", { text: labelFor(id) }), input));
-  }
-  body.append(perkList, addForm("ID перка", id => model.setKey("perk", id, "1", ":")));
   body.append(node("h4", { className: "subheading", text: "Спутники" }));
   const pets = model.list("pets");
   const petList = node("div", { className: "grid-list" });
@@ -1161,8 +1307,8 @@ function render() {
   renderSaveProfile();
   header.replaceChildren(node("h3", { text: tabNames[activeTab][0] }), node("p", { text: tabNames[activeTab][1] }));
   body.replaceChildren();
-  ({ zones: renderZones, talents: renderTalents, codex: renderCodex, achievements: renderAchievements,
-    items: renderItems, other: renderOther, raw: renderRaw })[activeTab]();
+  ({ zones: renderZones, codex: renderCodex, achievements: renderAchievements,
+    perks: renderPerks, heroes: renderHeroes, gear: renderItems, other: renderOther, raw: renderRaw })[activeTab]();
   const lines = model.lines.filter(Boolean).length;
   const items = model.list("items").length;
   const entries = model.keyed("seen").size;

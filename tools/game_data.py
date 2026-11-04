@@ -24,6 +24,11 @@ SHARED_TALENT_NAMES = {
     "deflection_pal": "Deflection", "ferocity_druid": "Ferocity",
 }
 
+TALENT_ICON_OVERRIDES = {
+    "enh_earthen_bulwark": "Spell_Nature_LightningShield",
+    "enh_unleashed_weapons": "Ability_Warrior_Sunder",
+}
+
 # The executable stores these achievement titles, descriptions and icon paths
 # alongside the achievement definitions. Some definitions reuse another icon.
 ACHIEVEMENTS = {
@@ -45,6 +50,9 @@ ACHIEVEMENTS = {
     "feat:bare": ("Bare Knuckles", "Win a run wearing no gear.", "INV_Shirt_White_01", "challenges"),
     "feat:thrifty": ("Thrifty", "Win a run without buying a cache.", "INV_Box_01", "challenges"),
     "feat:odds": ("Against the Odds", "Win a run with the Run Options at their full reward.", "Spell_Holy_DivineIntervention", "challenges"),
+    "feat:graduation": ("Stormstrike Graduation", "As an Enhancement Shaman, defeat Darkmaster Gandling with Stormstrike as the killing blow.", "Spell_Holy_SealOfMight", "challenges"),
+    "feat:straightas": ("Straight A's", "Defeat Darkmaster Gandling without any player taking damage from Headmaster's Office or The Last Examination.", "INV_Misc_Note_01", "challenges"),
+    "collection:t05": ("You Are Not Prepared!", "Collect all eight Scholomance Tier 0.5 armor pieces and the full fixed Gandling weapon reward for each of the nine classes.", "INV_Shirt_White_01", "collection"),
     "count:kills10k": ("Exterminator", "Slay 10,000 enemies.", "INV_Sword_04", "counts"),
     "count:kills100k": ("Scourge of Azeroth", "Slay 100,000 enemies.", "INV_Sword_04", "counts"),
     "count:kills1m": ("A Million Dead", "Slay 1,000,000 enemies.", "Spell_Shadow_RaiseDead", "counts"),
@@ -152,7 +160,7 @@ def build_metadata(exe, catalog):
                         description = candidate
                 entries.append({"id": talent_id, "name": [title, ru.get(title, title)],
                                 "description": [description, ru.get(description, description)] if description else None,
-                                "icon": icon_name(icon)})
+                                "icon": TALENT_ICON_OVERRIDES.get(talent_id, icon_name(icon))})
             trees.append({"name": [tree_name, ru.get(tree_name, tree_name)],
                           "icon": icon_name(tree_icon),
                           "talents": entries})
@@ -189,7 +197,7 @@ def build_metadata(exe, catalog):
             icon, category = None, "classes"
         elif achievement_id.startswith(("zone:", "zone9:")):
             prefix, zone_id = achievement_id.split(":", 1)
-            zone_key = "scholo" if zone_id == "scholomance" else zone_id
+            zone_key = zone_id if zone_id in zones else "scholomance" if zone_id == "scholo" else zone_id
             zone_en = zones[zone_key]
             zone_ru = ru.get(f"zone.{zone_id}.name", zone_en)
             if prefix == "zone9":

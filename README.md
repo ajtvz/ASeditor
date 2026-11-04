@@ -16,12 +16,6 @@ Set a character's unlocked map, toggle cleared zones, and edit Heroic progress p
 
 ![Zone completion, unlocked maps, and per-map Heroic controls](docs/screenshots/editor-zones.png)
 
-### Talents and experience
-
-Edit class talent XP and individual ranks across the class's talent trees. The editor summarizes points earned, spent, and available, and supports adding talent IDs.
-
-![Talent experience, point totals, and class talent trees](docs/screenshots/editor-talents.png)
-
 ### Accessory codex
 
 Browse amulets, legendary amulets, rings, and accessories. Mark entries undiscovered or set their saved quality from 0 to 4, and add a custom codex ID.
@@ -34,17 +28,31 @@ Search and filter achievements, toggle earned status and dates, unlock all achie
 
 ![Achievement search, date controls, bulk unlock, and custom score tools](docs/screenshots/editor-achievements.png)
 
+### Heroes, races, and talents
+
+Choose a hero in the **Heroes** tab, select any of the eight races for that character, and edit that class's talent experience and individual talent ranks in the same place. Selecting a race unlocks it globally; a bulk action can unlock every race for every hero. The talent editor summarizes earned, spent, and available points, and supports adding talent IDs.
+
+![Heroes tab with class and race selection plus talent experience, point totals, and class talent trees](docs/screenshots/editor-heroes.png)
+
 ### Item collection, gear sets, and equipment upgrades
 
-Browse gear by class and set, search by ID, filter collected or missing pieces, unlock a class collection or the full catalog, and reset to the imported collection. Equip items slot by slot **or equip an entire set at once**. Set each equipped item's upgrade level from 0 to 5 stars, or upgrade all equipped items together. Equipment marks can also be edited.
+The **Gear** tab keeps the existing item selection controls and collection view. Browse gear by class and set, search by ID, filter collected or missing pieces, unlock a class collection or every item (including while viewing all classes), and reset to the imported collection. Equip items slot by slot **or equip an entire set at once**. Set each equipped item's upgrade level from 0 to 5 stars, or upgrade all equipped items together. Equipment marks can also be edited.
 
-![Full Tier .05 collection equipped at once, with individual slot and star controls](docs/screenshots/editor-equipment.png)
+![Gear tab with class selection, item search, collection filters, and unlock-all action](docs/screenshots/editor-gear.png)
 
-### Statistics, perks, and pets
+![Tier 0.5 pieces equipped in individual character slots and upgraded to five stars](docs/screenshots/editor-equipment.png)
 
-Edit known account statistics, reward/perk ranks, and companion pets.
+### Perk ranks
 
-![Editable save statistics, perks, and pet companions](docs/screenshots/editor-other.png)
+The dedicated **Perks** section lists known account perks and maximum ranks, lets you set each rank from 0 to its game maximum, and preserves custom perk IDs.
+
+![Perk editor with game rank limits and custom perk preservation](docs/screenshots/editor-perks.png)
+
+### Statistics and pets
+
+Edit known account statistics and companion pets.
+
+![Editable save statistics and pet companions](docs/screenshots/editor-other.png)
 
 ### Plaintext save editor
 

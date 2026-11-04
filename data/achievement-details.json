@@ -13,6 +13,7 @@
         ["zone:sm", "Scarlet Monastery", 15, "Defeat High Inquisitor Whitemane in Scarlet Monastery with any class."],
         ["zone:av", "Alterac Valley", 15, "Defeat Azuregos in Alterac Valley with any class.", "Companion: Sprite Darter · Tabards: Stormpike Battle and Frostwolf Battle"],
         ["zone:brm", "Blackrock Mountain", 20, "Defeat Nefarian in Blackrock Mountain with any class.", "Companion: Black Whelpling"],
+        ["zone:scholomance", "Scholomance", 25, "Defeat the final boss in Scholomance with any class."],
         ["zone:aq", "Gates of Ahn'Qiraj", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with any class.", "Companion: Zergling"],
         ["zone:naxx", "Naxxramas", 30, "Defeat Kel'Thuzad in Naxxramas with any class."]
       ]
@@ -29,7 +30,6 @@
         ["coop:odds", "Against All Odds", 50, "Complete a zone on Heroic III or harder with at least one other player."],
         ["coop:brotherhood", "The Brotherhood Falls", 25, "Defeat Edwin VanCleef in co-op with five players, all using different classes.", "Appearance: Cape of the Brotherhood"],
         ["coop:bump", "Things That Go Bump in the Night", 25, "Complete Duskwood at least once with another player and no player dying.", "Appearance: Embrace of the Lycan"],
-        ["coop:team", "For the Team", 10, "Complete Warsong Gulch and Arathi Basin, each with at least one other player."],
         ["coop:jurassic", "Jurassic Pack", 25, "Complete Un'Goro Crater in co-op with five Hunters."],
         ["coop:smoothie", "Hakkar Smoothie", 50, "Defeat Hakkar with five Warriors, all having Bladestorm. Whirlwind must deal the final blow.", "Companion: Mini Herod"],
         ["coop:holyframe", "Holy Frame Drops", 50, "Defeat High Inquisitor Whitemane on Heroic III in co-op with five Paladins, each with Consecration as their highest-ranked spell.", "Appearance: Whitemane's Chapeau"],
@@ -99,8 +99,7 @@
         ["heroic:1", "Heroic Debut", 10, "Beat Heroic I in any zone."],
         ["heroic:3", "Heroic Resolve", 25, "Beat Heroic III in any zone."],
         ["heroic:all3", "Heroic Across Azeroth", 50, "Beat Heroic III in every zone, with any class."],
-        ["heroic:naxx5", "Champion of Naxxramas", 50, "Beat Heroic V in Naxxramas.", "Unlocks the Crusader weapon glow"],
-        ["heroic:prepared", "Yes, I am prepared!", 50, "Complete Scholomance on Heroic V solo with all nine classes, using each class's Tier 0.5 set bonuses and matching specialization talents."]
+        ["heroic:naxx5", "Champion of Naxxramas", 50, "Beat Heroic V in Naxxramas.", "Unlocks the Crusader weapon glow"]
       ]
     },
     {
@@ -142,6 +141,7 @@
         ["zone9:sm", "Champion of Scarlet Monastery", 25, "Defeat High Inquisitor Whitemane in Scarlet Monastery with all nine classes."],
         ["zone9:av", "Champion of Alterac Valley", 25, "Defeat Azuregos in Alterac Valley with all nine classes."],
         ["zone9:brm", "Champion of Blackrock Mountain", 25, "Defeat Nefarian in Blackrock Mountain with all nine classes."],
+        ["zone9:scholomance", "Champion of Scholomance", 25, "Defeat the final boss in Scholomance with all nine classes."],
         ["zone9:aq", "Champion of Gates of Ahn'Qiraj", 25, "Defeat C'Thun at the Gates of Ahn'Qiraj with all nine classes."],
         ["zone9:naxx", "Champion of Naxxramas", 25, "Defeat Kel'Thuzad in Naxxramas with all nine classes."]
       ]

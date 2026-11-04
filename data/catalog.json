@@ -75,16 +75,16 @@
       "Blackrock Mountain"
     ],
     [
+      "scholomance",
+      "Scholomance"
+    ],
+    [
       "aq",
       "Ahn'Qiraj"
     ],
     [
       "sm",
       "Scarlet Monastery"
-    ],
-    [
-      "scholo",
-      "Scholomance"
     ],
     [
       "naxx",
@@ -770,7 +770,6 @@
     "coop:end",
     "coop:odds",
     "coop:raidnight",
-    "coop:team",
     "coop:together",
     "coop:fiveofakind",
     "coop:photosynthesis",
@@ -848,6 +847,7 @@
     "zone9:arena",
     "zone9:av",
     "zone9:brm",
+    "zone9:scholomance",
     "zone9:duskwood",
     "zone9:elwynn",
     "zone9:feralas",
@@ -860,6 +860,7 @@
     "zone:arena",
     "zone:av",
     "zone:brm",
+    "zone:scholomance",
     "zone:duskwood",
     "zone:elwynn",
     "zone:feralas",
@@ -869,8 +870,7 @@
     "zone:wsg",
     "collection:t05",
     "feat:graduation",
-    "feat:straightas",
-    "heroic:prepared"
+    "feat:straightas"
   ],
   "talents": {
     "3": [
@@ -932,7 +932,9 @@
       "shield_spec_shaman",
       "guardian_totems",
       "thundering_strikes",
+      "enh_earthen_bulwark",
       "windfury",
+      "enh_unleashed_weapons",
       "two_hand_shaman",
       "elemental_weapons",
       "anticipation_shaman",
@@ -977,6 +979,7 @@
       "unholy_power",
       "imp_succubus",
       "master_demonologist",
+      "pact_of_the_annihilan",
       "demonic_pact",
       "demonic_knowledge",
       "imp_enslave",
@@ -1264,5 +1267,20 @@
     "malice_stone",
     "onyxia_tooth",
     "fire_lord"
+  ],
+  "perks": [
+    { "id": "rerolls", "name": "Second Thoughts", "maxRank": 3 },
+    { "id": "banish", "name": "Banish", "maxRank": 3 },
+    { "id": "skip", "name": "Skip", "maxRank": 1 },
+    { "id": "opening", "name": "Opening Hand", "maxRank": 1 },
+    { "id": "veteran", "name": "Veteran's Lessons", "maxRank": 2 },
+    { "id": "keen", "name": "Keen Eye", "maxRank": 2 },
+    { "id": "companion", "name": "Companion", "maxRank": 1 },
+    { "id": "leash", "name": "Long Leash", "maxRank": 3 },
+    { "id": "paws", "name": "Quick Paws", "maxRank": 3 },
+    { "id": "instinct_gold", "name": "Gold-sniffer", "maxRank": 1 },
+    { "id": "instinct_wisps", "name": "Wisp-herder", "maxRank": 1 },
+    { "id": "instinct_runes", "name": "Rune-hound", "maxRank": 1 },
+    { "id": "second", "name": "Second Companion", "maxRank": 1 }
   ]
 }
